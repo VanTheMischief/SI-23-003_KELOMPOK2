@@ -10,8 +10,11 @@ class Event extends Model
         'nama_event', 
         'penyelenggara',
         'ketuplak',
+        'lokasi',
         'tanggal', 
         'jmlh_max',
         'jmlh_saat_ini',
+        'dana_dibutuhkan',
+        'dana_terpakai',
     ];
 }

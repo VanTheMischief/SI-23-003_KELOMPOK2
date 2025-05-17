@@ -90,10 +90,13 @@ class HomeController extends Controller
 	public function loginSys(Request $request){
 		$request->validate([
 			'email'=>'required',
-			'password'=>'required'
+			'password'=>'required',
+			'select_user'=>'required|in:mhs,bph,adm',
 		],[
 			'email.required' => 'Email Wajib Diisi',
 			'password.required' => 'Password Wajib Diisi',
+			'select_user.required'=>'Pilih jenis user',
+			'select_user.in'=>'Role tidak valid',
 		]);
 
 		$infoLog = $request->only('email', 'password');
@@ -102,15 +105,22 @@ class HomeController extends Controller
 
 			$user = Auth::user();
 
-			if($user->is_admin){
-				return redirect('adminhome');
-			} elseif ($user->is_bph) {
-				return redirect('homebph');
-			} else {
-				return redirect('home');
+			switch ($request->select_user){
+				case 'adm':
+					if($user->is_admin) return redirect('adminhome');
+					break;
+				case 'bph':
+					if($user->is_bph) return redirect('homebph');
+					break;
+				case 'mhs':
+					return redirect('home');
+					break;
 			}
+
+			Auth::logout();
+			return redirect('/')->withErrors('Role tidak sesuai dengan akun anda');
 		}else{
-			return redirect('')->withErrors('Username / password salah')->withInput();
+			return redirect('/')->withErrors('Username / Password salah')->withInput();
 		}
 	}
 

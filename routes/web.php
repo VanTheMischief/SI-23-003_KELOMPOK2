@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\adminController;
+use App\Http\Controllers\BphController;
 use Illuminate\Support\Facades\Route;
 
 // Route::middleware(['guest'])->group(function(){
@@ -33,9 +34,12 @@ Route::post('/logout', function () {
     return redirect('/');
 })->name('logout');
 
+// BPH SECTION
+Route::get('/tambahEventBph', [BphController::class, 'tambahEvent'])->name('tambahEventBph');
+Route::get('/lihatEvent', [BphController::class, 'lihatEvent'])->name('lihatEvent');
 
-
-
+//Tambah event
+Route::post('/tambahEventBph', [BphController::class, 'storeEvent'])->name('tambahEvent.store');
 
 
 

@@ -19,6 +19,12 @@
                     Login
                 </h1>
                 <br>
+                <select name="select_user" id="" required>
+                    <option value="def">Pilih User</option>
+                    <option value="mhs">Mahasiswa</option>
+                    <option value="bph">BPH</option>
+                    <option value="adm">Admin</option>
+                </select><br>
                 <input type="text" class="name" name="email" placeholder="Input Email" autocomplete="none" au>
                 <br><br>
                 <input type="password" class="pass" name="password" placeholder="Input password">
