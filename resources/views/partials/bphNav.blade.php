@@ -8,7 +8,7 @@
         <title></title>
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="">
             <div class="container">
                 <a class="navbar-brand" href="#">Bph Page</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,7 +26,7 @@
                         <a class="{{ request()->routeIs('lihatEvent') ? 'nav-link active' : 'nav-link' }}" href="{{ route('lihatEvent') }}">Lihat event</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-danger" href="{{ route('logout') }}" id="logout" >Logout</a>
+                        <a class="btn btn-danger" href="{{ route('logoutBph') }}" id="logout" >Logout</a>
                     </li>
                 </ul>
                 </div>

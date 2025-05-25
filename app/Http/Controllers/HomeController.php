@@ -7,6 +7,7 @@ use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Event;
+use App\Models\Ukm;
 
 
 class HomeController extends Controller
@@ -17,7 +18,7 @@ class HomeController extends Controller
 		// $name = "John";
 		$name = Auth::user()->nama;
 		$foto = Auth::user()->pasfoto;
-		$time = date('H:i:s');
+		$time = date('H:i:s');	
 		$hour = date('H');
 
 		$greet = match(true){
@@ -27,56 +28,100 @@ class HomeController extends Controller
 			default => 'Good Night',
 		};
 
-		return view('userNormal.home', compact('name', 'foto', 'greet'));
-	}
+		$total_event = Event::count();
+		$total_ukm = Ukm::count();
 
-	public function fotoDaftarEvent(){
-		$foto = Auth::user()->pasfoto;
-
-		return view('userNormal.daftarevent', compact('foto'));
+		return view('userNormal.home', compact('name', 'foto', 'greet', 'total_event', 'total_ukm'));
 	}
 
 	public function showEvent(){
 		$events = Event::all();
-		return view('userNormal.daftarevent', compact('events'));
+		$foto = Auth::user()->pasfoto;
+
+		return view('userNormal.daftarevent', compact('events', 'foto'));
 	}
 
-	public function daftarEvent($id){
-		$events = Event::findOrFail($id);
+	// public function daftarEvent($id){
+	// 	$events = Event::findOrFail($id);
 
-		if($events->jmlh_saat_ini >= $events->jmlh_max){
-			return redirect()->route('daftarevent')->with('error', 'Kuota penuh');
-		}
+	// 	if($events->jmlh_saat_ini >= $events->jmlh_max){
+	// 		return redirect()->route('daftarevent')->with('error', 'Kuota penuh');
+	// 	}
 
-		$events->increment('jmlh_saat_ini');
-		return redirect()->route('daftarevent')->with('success', 'Berhasil mendaftar event');
+	// 	$events->increment('jmlh_saat_ini');
+	// 	return redirect()->route('daftarevent')->with('success', 'Berhasil mendaftar event');
+	// }
+
+	public function showDaftar($id){
+		$event = Event::findOrFail($id);
+		return view('userNormal.detailevent', compact('event'));
 	}
 
-	public function showUkm(){
-		$ukms = Ukm::all();
-		return view('userNormal.daftarukm', compact('ukms'));
+	   public function storeDaftar(Request $request, $id){
+       $event = Event::findOrFail($id);
+
+       if ($event->users()->where('user_id', auth()->id())->exists()) {
+           return back()->with('error', 'Anda telah terdaftar di event ini');
+       }
+
+       $event->users()->attach(auth()->id());
+       $event->increment('jmlh_saat_ini');
+
+       return redirect()->route('riwayatevent')->with('success', 'Berhasil mendaftar event');
+   }
+   
+
+	public function historyDaftar()
+	{
+	    $events = auth()->user()->events;
+	    return view('userNormal.riwayatevent', compact('events'));
 	}
 
-	public function daftarUkm($id){
-		$ukms = Ukm::findOrFail($id);
 
+	public function cancelDaftar($id)
+	{
+	    $event = Event::findOrFail($id);
+
+	    $event->users()->detach(auth()->id());
+
+	    $event->decrement('jmlh_saat_ini');
+
+	    return back()->with('success', 'Berhasil membatalkan pendaftaran');
 	}
+
 
 	public function akun(){
 		$user = Auth::user();
 		return view('userNormal.akun', compact('user'));
 	}
 
-	public function updatePassword(Request $request){
+	public function updateAkun(Request $request){
 		$request->validate([
 			'password'=>'required',
+			'pasfoto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
 		]);
 
 		$user = Auth::user();
-		$user->password = Hash::make($request->password);
+
+		if ($request->hasFile('pasfoto')) {
+		    $file = $request->file('pasfoto');
+		    $filename = time() . '_' . $file->getClientOriginalName();
+		    $path = $file->storeAs('uploadPictures', $filename, 'public');
+
+		    $user->pasfoto = $filename;
+		    $user->save();
+		}
+
+
+		// dd('upload:', $filename, $user->pasfoto);
+
+		if($request->filled('password')){		
+			$user->password = Hash::make($request->password);
+		}
+
 		$user->save();
 
-		return redirect()->route('akun')->with('success', 'Password berhasil dirubah');
+		return redirect()->route('akun')->with('success', 'Akun berhasil dirubah');
 	}
 
 	private function getDate(){
@@ -129,7 +174,7 @@ class HomeController extends Controller
 		return view('bph.homebph', compact('name'));
 	}
 
-	public function riwayatEvent(){
-		return view('userNormal.riwayatEvent');
-	}
+	// public function riwayatEvent(){
+	// 	return view('userNormal.riwayatEvent');
+	// }
 }	

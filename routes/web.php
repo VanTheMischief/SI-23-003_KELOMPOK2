@@ -19,16 +19,21 @@ Route::middleware(['auth'])->group(function(){
 }); 
 
 // DAFTAR EVENT
-Route::get('/daftar-event', [HomeController::class, 'fotoDaftarEvent'])->name('daftarevent');
+// Route::get('/daftar-event', [HomeController::class, 'fotoDaftarEvent'])->name('daftarevent');
 Route::get('/daftar-event', [HomeController::class, 'showEvent'])->name('daftarevent');
-Route::post('/daftar-event/{id}', [HomeController::class, 'daftarEvent'])->name('daftarevent.store');
+// Route::post('/daftar-event/{id}', [HomeController::class, 'daftarEvent'])->name('daftarevent.store');
+
+Route::get('/event/{id}/daftar', [HomeController::class, 'showDaftar'])->name('event.daftar');
+Route::post('/event/{id}/store', [HomeController::class, 'storeDaftar'])->name('event.store');
+Route::get('/riwayat-event', [HomeController::class, 'historyDaftar'])->name('riwayatevent');
+Route::post('/event/{id}/cancel', [HomeController::class, 'cancelDaftar'])->name('event.cancel');
 
 // DAFTAR UKM
-Route::get('/riwayat-event', [HomeController::class, 'riwayatEvent'])->name('riwayatevent');
+// Route::get('/riwayat-event', [HomeController::class, 'riwayatEvent'])->name('riwayatevent');
 
 // AKUN
 Route::get('/akun', [HomeController::class, 'akun'])->name('akun');
-Route::put('/akun/update-password', [HomeController::class, 'updatePassword'])->name('akun.updatePassword');
+Route::put('/akun/update', [HomeController::class, 'updateAkun'])->name('akun.update');
 Route::post('/logout', function () {
     Auth::logout();
     return redirect('/');
@@ -37,6 +42,10 @@ Route::post('/logout', function () {
 // BPH SECTION
 Route::get('/tambahEventBph', [BphController::class, 'tambahEvent'])->name('tambahEventBph');
 Route::get('/lihatEvent', [BphController::class, 'lihatEvent'])->name('lihatEvent');
+Route::get('/logoutBph', function() {
+    Auth::logout();
+    return redirect('/');
+})->name('logoutBph');
 
 //Tambah event
 Route::post('/tambahEventBph', [BphController::class, 'storeEvent'])->name('tambahEvent.store');

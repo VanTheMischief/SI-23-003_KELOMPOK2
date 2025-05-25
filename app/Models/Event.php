@@ -17,4 +17,9 @@ class Event extends Model
         'dana_dibutuhkan',
         'dana_terpakai',
     ];
+
+    public function users(){
+        return $this->belongsToMany(User::class, 'event_user', 'event_id', 'user_id')->withTimestamps();
+    }      
 }
+

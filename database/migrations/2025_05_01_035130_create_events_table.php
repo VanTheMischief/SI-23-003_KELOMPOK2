@@ -16,9 +16,12 @@ return new class extends Migration
             $table->string('nama_event');
             $table->string('penyelenggara');
             $table->string('ketuplak');
+            $table->string('lokasi');
             $table->date('tanggal');
             $table->integer('jmlh_max');
             $table->integer('jmlh_saat_ini');
+            $table->string('data_dibutuhkan');
+            $table->string('dana_terpakai');
             $table->timestamps();
         });
     }

@@ -35,6 +35,10 @@ class User extends Authenticatable
         ];
     }
 
+    public function events(){
+        return $this->belongsToMany(Event::class, 'event_user', 'user_id', 'event_id')->withTimestamps();
+    }
+
     public function ukm()
     {
         return $this->hasOne(Ukm::class, 'id_ketua');

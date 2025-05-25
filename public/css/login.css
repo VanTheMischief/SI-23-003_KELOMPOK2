@@ -4,7 +4,7 @@
 }
 
 body{
-	background-color: black;
+	background-image: url('/images/patternLog.png');
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -19,6 +19,7 @@ body{
 	height: 90vh;
 	width: 200vh;
 	border-radius: 8px;
+	box-shadow: 4px 4px 10px black;
 }
 
 .pictSect{

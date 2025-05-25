@@ -17,7 +17,7 @@ class BphController extends Controller
     }
 
     public function storeEvent(Request $request){
-        $request = validate([
+        $validated = $request->validate([
             'nama_event' => 'required',
             'ketuplak' => 'required',
             'lokasi' => 'required',
@@ -27,28 +27,46 @@ class BphController extends Controller
             'dana_terpakai' => 'required'
         ]);
 
-        $exists = Event::where('lokasi', $request->lokasi)->where('tanggal', $request->tanggal)->exists();
+        $normalized = trim(strtolower($validated['lokasi']));
+
+
+
+        $exists = Event::whereRaw('LOWER(TRIM(lokasi)) = ? ', [$normalized])
+                        ->where('tanggal', $validated['tanggal'])
+                        ->exists();
 
         if($exists){
             return back()->withErrors(['lokasi' => 'Lokasi sudah terpakai di tanggal tersebut']);
         }
 
+        $ukm = Ukm::where('id_ketua', Auth::id())->first();
+        $nama_ukm = $ukm ? $ukm->nama_ukm : 'Unknown';
+
+        $finalLok = ucwords($normalized);
+
         Event::create([
-            'nama_event' => $request->nama_event,
-            'penyelenggara' => Ukm::where('id_ketua', Auth::id()->first()->nama_ukm ?? 'Unknown'),
-            'ketuplak' => $request->ketuplak,
-            'lokasi' => $request->lokasi,
-            'tanggal' => $request->tanggal,
-            'jmlh_max' => $request->jmlh_max,
+            'nama_event' => $validated['nama_event'],
+            'penyelenggara' => $nama_ukm,
+            'ketuplak' => $validated['ketuplak'],
+            'lokasi' => $finalLok,
+            'tanggal' => $validated['tanggal'],
+            'jmlh_max' => $validated['jmlh_max'],
             'jmlh_saat_ini' => 0,
-            'dana_dibutuhkan' => $request->dana_butuh,
-            'dana_terpakai' => $request->dana_terpakai,
+            'dana_dibutuhkan' => $validated['dana_butuh'],
+            'dana_terpakai' => $validated['dana_terpakai'],
         ]);
 
         return redirect()->route('lihatEvent')->with('Success', 'Event berhasil ditambahkan');
     }
 
     public function lihatEvent(){
-        return view('bph.lihatEvent');
+        $ukm = Ukm::where('id_ketua', Auth::id())->first();
+
+        $events = [];
+        if ($ukm){
+            $events = Event::where('penyelenggara', $ukm->nama_ukm)->get();
+        }
+
+        return view('bph.lihatEvent', ['events' => $events]);
     }
 }
