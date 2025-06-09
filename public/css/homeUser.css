@@ -1,127 +1,97 @@
-@import url('https://fonts.googleapis.com/css2?family=Playwrite+DK+Loopet:wght@100..400&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
-*{
-	margin: 0;
-	padding: 0;
-/*	overflow-x: hidden;*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.justAnImage{
-	position: relative;
-	background-image: url('/images/homePics1.jpg');
-	background-size: cover;
-	background-repeat: no-repeat;
-	width: 100%;
-	height: 90vh;
-	z-index: 1;
-	overflow: hidden;
+body {
+    background-image: url('/images/patternHomeAdmin.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: 'Roboto Condensed', sans-serif;
 }
 
-.justAnImage::before{
-	content: '';
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0, 0, 0, 0.7);
-	z-index: 2;
+.justAnImage {
+    background-image: url('/images/homePics1.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 50vh;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
 }
 
-.topText{
-	position: relative;
-	font-size: 30px;
-	top: 350px;
-	left: 230px;
-	color: white;
-	z-index: 3;
-	color: red;
-	font-family: "Playwrite DK Loopet", cursive;
-	font-weight: lighter;
+.topText {
+    color: white;
+    font-weight: 600;
+    background-color: red;
+    padding: 0.5em 1em;
+    border-radius: 30px;
+    font-size: 1.5rem;
 }
 
-.nameText{
-	position: relative;
-	font-size: 60px;
-	top: 370px;
-	left: 230px;
-	color: white;
-	z-index: 3;
+.nameText {
+    margin-top: 20px;
+    color: white;
+    font-weight: 600;
+    font-size: 1.2rem;
 }
 
-.quickStats{
-	background-color: white;
-	height: 50vh;
-	text-align: center;
-	padding-top: 80px;
-	color: red;
+.daftevent-btn {
+    background-color: white;
+    text-decoration: none;
+    padding: 10px 30px;
+    border-radius: 20px;
+    color: black;
+    margin-top: 30px;
+    font-weight: bold;
 }
 
-.q-head{
-	font-size: 60px;
+.daftevent-btn:hover {
+    box-shadow: 0 0 15px white, 0 0 25px white;
 }
 
-.flex-stats{
-	margin-top: 40px;
-	display: flex;
-	justify-content: center;
+.quickStats {
+    background-color: white;
+    text-align: center;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-.ukm-stats{
-	margin-left: 120px;
+.q-head {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: black;
 }
 
-.stats-head, .stats-count{
-	font-size: 40px;
-	font-weight: lighter;
+.flex-stats {
+    gap: 20px;
 }
 
-.line-stats{
-	width: 350px;
-	height: 3px;
-	background-color: red;
-	position: relative;
-	top: 70px;
-	left: 41%;
+.event-stats, .ukm-stats {
+    flex: 1;
 }
 
-.eventTab{
-	background-image: url('/images/eventpics.jpg');
-	background-size: cover;
-	background-repeat: no-repeat;
-	position: relative;
-	width: 100%;
-	height: 80vh;
-	z-index: 1;
-	padding-top: 98px;
+.stats-head {
+    font-size: 1.2rem;
+    color: red;
 }
 
-.eventTab::before{
-	content: '';
-	position: absolute;
-	top: 0;
-	height: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(255, 0, 0, 0.4);
-	z-index: 2;
+.stats-count {
+    font-size: 2rem;
+    font-weight: bold;
+    color: black;
 }
 
-.bigEventHead{
-	position: relative;
-	padding-top: 240px;
-	color: white;
-	z-index: 3;
-	text-align: center;
-}
-
-.bigEventMore{
-	text-decoration: none;
-	margin-left: 93vh;
-	position: relative;
-	top: 40px;
-	background-color: rgb(0, 0, 6);
-	padding: 15px;
-	border-radius: 8px;
-	color: white;
-	z-index: 3;
+.eventTab {
+    background-image: url('/images/eventpics.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
 }

@@ -1,0 +1,51 @@
+        body {
+            background-image: url('/images/patternLog.png');
+            background-size: cover;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .form-card {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 450px;
+            margin: 100px auto;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 25px;
+            color: #2c3e50;
+        }
+
+        label {
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .btn-primary-custom {
+            background-color: #f44336;
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 10px;
+            margin-top: 20px;
+            width: 100%;
+            border-radius: 8px;
+            transition: 0.3s ease;
+        }
+
+        #daftar{
+            position: relative;
+            background-color: green;
+            width: 200px;
+            color: white;
+            left: 100px;
+        }
+
+        .btn-secondary {
+            margin-top: 15px;
+            width: 100%;
+        }

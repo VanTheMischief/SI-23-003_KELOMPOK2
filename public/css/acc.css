@@ -1,12 +1,100 @@
-*{
-	margin: 0;
-	padding: 0;
-	font-family: arial, sans-serif;
+body {
+    background-image: url('/images/patternLog.png');
+    background-size: cover;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
-.link-back{
-	position: relative;
-	top: 20px;
-	left: 50px;
+.account-container {
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
 }
 
+.profile-box {
+    max-width: 700px;
+    width: 100%;
+    padding: 40px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    position: relative;
+}
+
+.link-back {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    text-decoration: none;
+    color: #ff6a00;
+    font-weight: 500;
+}
+
+.profile-info {
+    margin-bottom: 30px;
+}
+
+.profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.profile-info h3 {
+    font-size: 22px;
+    margin-bottom: 5px;
+}
+
+.profile-info p {
+    color: gray;
+    font-size: 14px;
+}
+
+form label {
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="file"] {
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+    width: 100%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+.btn-save {
+    background: linear-gradient(green,blue);
+    border: none;
+    padding: 12px 40px;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 30px;
+    box-shadow: 0 8px 20px rgba(255, 106, 0, 0.3);
+    transition: background 0.3s ease;
+}
+
+.btn-save:hover {
+    background: skyblue;
+    box-shadow: 0 0 15px skyblue, 0 0 25px skyblue;
+}
+
+.btn-logout {
+    background-color: red;
+    padding: 12px 70px;
+    border: none;
+    border-radius: 30px;
+    color: white;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+.btn-logout:hover {
+    box-shadow: 0 0 15px red, 0 0 25px red;
+}

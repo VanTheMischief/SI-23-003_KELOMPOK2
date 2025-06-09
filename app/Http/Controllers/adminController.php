@@ -14,7 +14,22 @@ class adminController extends Controller
 {
     public function index()
     {
-        return view('admin.adminhome');
+        date_default_timezone_set('Asia/Jakarta');
+        
+        $name = Auth::user()->nama;
+        $hour = date('H');
+
+        $greet = match(true){
+            $hour >= 2 && $hour < 12 => 'Good Morning',
+            $hour >= 12 && $hour < 15 => 'Good Afternoon',
+            $hour >= 15 && $hour < 18 => 'Good Evening',
+            default => 'Good Night',
+        };
+
+        $eventcount = Event::count();
+        $ukmcount = Ukm::count();
+
+        return view('admin.adminhome', compact('name', 'greet', 'eventcount', 'ukmcount'));
     }
 
     // KELOLA USER SECTION
@@ -57,11 +72,20 @@ class adminController extends Controller
 
     public function kelolaUser(Request $request)
     {
-        // $users = Auth::user();
-        $users = User::with('ukm')->get();
+        $search = $request->input('search');
+
+        $users = User::with('ukm')
+            ->when($search, function ($query, $search) {
+                return $query->where('nama', 'like', "%{$search}%")
+                             ->orWhere('email', 'like', "%{$search}%")
+                             ->orWhere('fakultas', 'like', "%{$search}%")
+                             ->orWhere('jurusan', 'like', "%{$search}%");
+            })
+            ->get();
 
         return view('admin.kelolauser', compact('users'));
     }
+
 
     public function edit($id)
     {
@@ -128,9 +152,17 @@ class adminController extends Controller
         return redirect()->route('dataukm')->with('success', 'UKM berhasil ditambahkan');
     }
 
-    public function showUKM()
+    public function showUKM(Request $request)
     {
-        $ukms = Ukm::all();
+        $search = $request->input('search');
+        $ukms = UKM::query();
+        
+        if ($search) {
+            $ukms->where('nama_ukm', 'like', "%{$search}%")
+                 ->orWhere('nama_ketua', 'like', "%{$search}%");
+        }
+        
+        $ukms = $ukms->get();
 
         return view('admin.dataukm', compact('ukms'));
     }
@@ -202,11 +234,19 @@ class adminController extends Controller
         return redirect()->route('dataevent')->with('success', 'Event berhasil ditambahkan');
     }
 
-    public function showEvent(){
-        $events = Event::all();
+    public function showEvent(Request $request)
+    {
+        $search = $request->input('search');
+
+        $events = Event::when($search, function ($query, $search) {
+            return $query->where('nama_event', 'like', "%{$search}%")
+                         ->orWhere('penyelenggara', 'like', "%{$search}%")
+                         ->orWhere('ketuplak', 'like', "%{$search}%");
+        })->get();
 
         return view('admin.dataevent', compact('events'));
     }
+
 
     public function editEvent($id){
         $events = Event::findOrFail($id);

@@ -1,8 +1,32 @@
-*{
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-#logout{
-    margin-left: 90vh;
+/* Aktif link warna */
+.nav-link.active {
+    color: red !important;
+    font-weight: bold;
+}
+
+.nav-link {
+    color: white !important;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: red !important;
+}
+
+.btn-danger {
+    padding: 6px 14px;
+    font-size: 16px;
+}
+body {
+	background-image: url('/images/patternLog.png'); /* ganti sesuai nama file */
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-attachment: fixed;
 }

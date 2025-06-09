@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <title>Tambah User</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/admin/addUser.css') }}">
 </head>
 <body>
-    @include('partials.adminNav')
 
     <div class="container mt-5">
         <h2>Tambah User Baru</h2>

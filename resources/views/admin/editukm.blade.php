@@ -1,28 +1,48 @@
 <!DOCTYPE html>
-<html lang="">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-        <title></title>
-    </head>
-    <body>
-        @include('partials.adminNav')
-        <form action="{{ route('dataukm.update', $ukm->id) }}" method="POST">
-		    @csrf
-		    @method('PUT')
-		    <label>Nama UKM</label>
-		    <input type="text" name="nama_ukm" value="{{ $ukm->nama_ukm }}" required>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Update UKM</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="{{ asset('css/admin/editUkm.css') }}" />
+</head>
+<body>
+    @include('partials.adminNav')
 
-		    <label>Nama Ketua</label>
-		    <input type="text" name="nama_ketua" value="{{ $ukm->nama_ketua }}" required>
+    <div class="main-container">
+        <div class="content">
+            <h2 class="mb-4 text-center fw-bold">Formulir Update UKM</h2>
+            <form action="{{ route('dataukm.update', $ukm->id) }}" method="POST">
+                @csrf
+                @method('PUT')
 
-		    <label>Jumlah Anggota</label>
-		    <input type="number" name="jmlh_anggota" value="{{ $ukm->jmlh_anggota }}" required>
+                <div class="mb-3">
+                    <label for="nama_ukm" class="form-label">Nama UKM</label>
+                    <input type="text" name="nama_ukm" id="nama_ukm" class="form-control" value="{{ $ukm->nama_ukm }}" required />
+                </div>
 
-		    <button type="submit" class="btn btn-primary">Update</button>
-		</form>
+                <div class="mb-3">
+                    <label for="nama_ketua" class="form-label">Nama Ketua</label>
+                    <input type="text" name="nama_ketua" id="nama_ketua" class="form-control" value="{{ $ukm->nama_ketua }}" required />
+                </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
-    </body>
+                <div class="mb-3">
+                    <label for="jmlh_anggota" class="form-label">Jumlah Anggota</label>
+                    <input type="number" name="jmlh_anggota" id="jmlh_anggota" class="form-control" value="{{ $ukm->jmlh_anggota }}" required />
+                </div>
+
+                <div class="form-button-container">
+                    <button type="submit" class="btn btn-warning">
+                        <i class="bi bi-arrow-clockwise"></i> Update
+                    </button>
+                    <a href="{{ route('dataukm') }}" class="btn btn-danger btn-cancel">Batal</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

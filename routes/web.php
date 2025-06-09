@@ -42,6 +42,10 @@ Route::post('/logout', function () {
 // BPH SECTION
 Route::get('/tambahEventBph', [BphController::class, 'tambahEvent'])->name('tambahEventBph');
 Route::get('/lihatEvent', [BphController::class, 'lihatEvent'])->name('lihatEvent');
+Route::get('/event/{id}/detail', [BphController::class, 'detailEvent'])->name('detailEvent');
+Route::get('/event/{id}/edit', [BphController::class, 'editEvent'])->name('editEvent');
+Route::put('/event/{id}', [BphController::class, 'updateEvent'])->name('event.update');
+Route::delete('/event/{id}', [BphController::class, 'destroyEvent'])->name('destroyEvent');
 Route::get('/logoutBph', function() {
     Auth::logout();
     return redirect('/');
@@ -54,6 +58,10 @@ Route::post('/tambahEventBph', [BphController::class, 'storeEvent'])->name('tamb
 
 //admin SECTIONS
 Route::get('/adminhome', [adminController::class, 'index'])->name('adminhome');
+Route::post('/logout-admin', function () {
+    Auth::logout();
+    return redirect('/');
+})->name('logout-admin');
 
 // Kelola User SECTIONS
 Route::get('/kelola-user', [adminController::class, 'kelolaUser'])->name('kelolauser');

@@ -16,6 +16,7 @@ class Event extends Model
         'jmlh_saat_ini',
         'dana_dibutuhkan',
         'dana_terpakai',
+        'foto_hasil'
     ];
 
     public function users(){

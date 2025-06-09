@@ -17,7 +17,7 @@
             <div class="card event-card p-4" id="card">
                 <h4>{{ $event->nama_event }}</h4>
                 <p><strong>Lokasi:</strong> {{ $event->lokasi }}</p>
-                <p><strong>Tanggal:</strong> {{ $event->tanggal }}</p>
+                <p><strong>Tanggal:</strong> {{ \Carbon\Carbon::parse($event->tanggal)->format('d/m/Y') }}</p> 
                 <p><strong>Peserta:</strong> {{ $event->jmlh_saat_ini }} / {{ $event->jmlh_max }}</p>
                 <a href="{{ route('event.daftar', $event->id) }}" class="btn btn-detail mt-2">Lihat Detail</a>
             </div>

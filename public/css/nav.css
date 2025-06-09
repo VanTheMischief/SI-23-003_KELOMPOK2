@@ -1,55 +1,40 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
-*{
+* {
     margin: 0;
     padding: 0;
-    font-family:  "Roboto Condensed", sans-serif;
+    font-family: "Roboto Condensed", sans-serif;
+    box-sizing: border-box;
 }
 
-nav{
-    display: flex;
-    background-color: transparent;
-    padding-left: 80px;
-    padding-right: 80px;
-    padding-top: 20px;
-    align-items: center;
-    justify-content: space-between;
+.logo {
+    width: 75px;
+    height: 80px;
 }
 
-.logo{
-    font-size: 30px;
-    color: white;
-    z-index: 2;
+.navbar-nav .nav-link {
+    margin: 0 15px;
+    font-size: 18px;
+    font-weight: 600;
+    color: black;
+    transition: color 0.3s ease-in;
 }
 
-.listLink{
-    z-index: 2;
-}
-
-.listLink a{
-    color: white;
-    text-decoration: none;
-    margin-left: 30px;
-    margin-right: 30px;
-    font-size: 20px;
-    transition: .3s ease-in;
-}
-
-.listLink a:hover{
-    color: red;
-}
-
-.listLink a.active{
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
     color: red !important;
 }
 
-.acc{
-    text-decoration: none;
-    z-index: 2;
+.pasFoto {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
-.pasFoto{
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+@media screen and (max-width: 768px) {
+    .navbar-nav {
+        text-align: center;
+        margin-top: 10px;
+    }
 }

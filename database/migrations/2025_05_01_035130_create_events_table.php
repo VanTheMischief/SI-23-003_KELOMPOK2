@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('jmlh_saat_ini');
             $table->string('data_dibutuhkan');
             $table->string('dana_terpakai');
+            $table->string('foto_hasil');
             $table->timestamps();
         });
     }

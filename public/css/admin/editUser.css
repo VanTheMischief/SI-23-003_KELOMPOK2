@@ -1,0 +1,81 @@
+body {
+    background: url('/images/patternLog.png') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.main-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    background-color: #a30000;
+    color: white;
+    padding: 2rem 1rem;
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.sidebar h3 {
+    font-weight: bold;
+    font-size: 1.8rem;
+    margin-bottom: 0;
+}
+
+.content {
+    flex-grow: 1;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 800px;
+    margin: auto;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+    border-radius: 1rem;
+}
+
+.form-label {
+    font-weight: 600;
+}
+
+.form-control {
+    border-radius: 1rem;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+}
+
+.btn-update {
+    background-color: #c40000;
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 1rem;
+    font-weight: 600;
+}
+
+.btn-update:hover {
+    background-color: #a30000;
+}
+
+.btn-cancel {
+    background-color: #aaa;
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 1rem;
+    font-weight: 600;
+    margin-left: 1rem;
+}
+
+.form-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}

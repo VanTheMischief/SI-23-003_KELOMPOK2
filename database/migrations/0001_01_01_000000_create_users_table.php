@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('jurusan');
             $table->string('pasfoto');
             $table->boolean('is_admin')->default(false);
+            $table->boolean('is_bph')->default(false);
             $table->timestamps();
         });
 

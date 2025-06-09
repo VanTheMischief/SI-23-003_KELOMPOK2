@@ -1,27 +1,34 @@
 <!DOCTYPE html>
-<html lang="">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-        <title>Edit user</title>
-    </head>
-    <body>
-        <div class="container mt-4">
-          <h3>Edit user</h3>
-          <br>
-          <form action="{{ route('kelolauser.update', $user -> id) }}" method="POST">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update User</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{ asset('css/admin/editUser.css') }}">
+</head>
+<body>
+<div class="main-container">
+    <div class="content">
+        <h2 class="mb-4 text-center fw-bold">Formulir Update User</h2>
+        <form action="{{ route('kelolauser.update', $user->id) }}" method="POST">
             @csrf
             @method('PUT')
 
             <div class="mb-3">
-              <label for="nama" class="form-label">Nama: </label>
-              <input type="text" name="nama" class="form-control" value="{{ $user->nama }}" required>
+                <label for="nama" class="form-label">Nama</label>
+                <input type="text" name="nama" class="form-control" value="{{ $user->nama }}" required>
             </div>
-            
+
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" name="email" class="form-control" value="{{ $user->email }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" name="password" class="form-control" placeholder="Kosongkan jika tidak ingin mengubah">
             </div>
 
             <div class="mb-3">
@@ -34,12 +41,16 @@
                 <input type="text" name="jurusan" class="form-control" value="{{ $user->jurusan }}">
             </div>
 
-            <button type="submit" class="btn btn-primary">Update</button>
-            <a href="{{ route('kelolauser') }}" class="btn btn-secondary">Batal</a>
+            <div class="form-button-container">
+                <button type="submit" class="btn btn-update">
+                    <i class="bi bi-arrow-clockwise"></i> Update
+                </button>
+                <a href="{{ route('kelolauser') }}" class="btn btn-cancel">Batal</a>
+            </div>
         </form>
     </div>
-          </form>
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
-    </body>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

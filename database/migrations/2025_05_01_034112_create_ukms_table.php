@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('ukms', function (Blueprint $table) {
             $table->id();
             $table->string('nama_ukm');
+            $table->unsignedBigInteger('id_ketua');
             $table->string('nama_ketua');
-            $table->string('logo')->nullable();
             $table->integer('jmlh_anggota');
             $table->timestamps();
+
+            $table->foreign('id_ketua')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

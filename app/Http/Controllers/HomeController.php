@@ -14,8 +14,7 @@ class HomeController extends Controller
 {
 	public function index(){
 		date_default_timezone_set('Asia/Jakarta');
-
-		// $name = "John";
+		
 		$name = Auth::user()->nama;
 		$foto = Auth::user()->pasfoto;
 		$time = date('H:i:s');	
@@ -96,33 +95,29 @@ class HomeController extends Controller
 	}
 
 	public function updateAkun(Request $request){
-		$request->validate([
-			'password'=>'required',
-			'pasfoto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-		]);
+	    $request->validate([
+	        'password' => 'nullable|string|min:6',
+	        'pasfoto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+	    ]);
 
-		$user = Auth::user();
+	    $user = Auth::user();
 
-		if ($request->hasFile('pasfoto')) {
-		    $file = $request->file('pasfoto');
-		    $filename = time() . '_' . $file->getClientOriginalName();
-		    $path = $file->storeAs('uploadPictures', $filename, 'public');
+	    if ($request->hasFile('pasfoto')) {
+	        $file = $request->file('pasfoto');
+	        $filename = time() . '_' . $file->getClientOriginalName();
+	        $path = $file->storeAs('uploadPictures', $filename, 'public');
+	        $user->pasfoto = $filename;
+	    }
 
-		    $user->pasfoto = $filename;
-		    $user->save();
-		}
+	    if ($request->filled('password')) {
+	        $user->password = Hash::make($request->password);
+	    }
 
+	    $user->save();
 
-		// dd('upload:', $filename, $user->pasfoto);
-
-		if($request->filled('password')){		
-			$user->password = Hash::make($request->password);
-		}
-
-		$user->save();
-
-		return redirect()->route('akun')->with('success', 'Akun berhasil dirubah');
+	    return redirect()->route('akun')->with('success', 'Akun berhasil diperbarui');
 	}
+
 
 	private function getDate(){
 		return date('d-m-Y');
@@ -169,9 +164,21 @@ class HomeController extends Controller
 		}
 	}
 
-	public function homeBph(){
-		$name = Auth::user()->nama;
-		return view('bph.homebph', compact('name'));
+	public function homeBph()
+	{
+	    $user = Auth::user();
+	    $ukm = Ukm::where('id_ketua', $user->id)->first();
+
+	    $events = [];
+
+	    if ($ukm) {
+	        $events =Event::where('penyelenggara', $ukm->nama_ukm)->get();
+	    }
+
+	    return view('bph.homebph', [
+	        'name' => $user->nama,
+	        'events' => $events ?? []  // <= pastikan $events selalu array
+	    ]);
 	}
 
 	// public function riwayatEvent(){

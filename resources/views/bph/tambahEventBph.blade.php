@@ -9,7 +9,7 @@
             </ul>
         </div>
     @endif
-    <form action="{{ route('tambahEvent.store') }}" method="POST">
+    <form action="{{ route('tambahEvent.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
         <div class="mb-3">
             <label for="nama_event" class="form-label">Nama Event</label>
